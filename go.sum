@@ -1,0 +1,4 @@
+github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
+github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
+github.com/TarsCloud/TarsGo v0.0.0-20190227140141-846b1633be37 h1:i8yVhKZVd/VA7miOTP4DczMzRnO3ZydE9Z7mf64ZWPI=
+github.com/TarsCloud/TarsGo v0.0.0-20190227140141-846b1633be37/go.mod h1:ybmr1NnX41dauJftSX4BwnVAoA0UpE4PeyjMpPKIdzY=
