@@ -1,7 +1,7 @@
-package myGoTools
+package base
 
 import "fmt"
-// TODO 引用myGoTools 调整导入目录
+
 func AllIntEqual(s []int) (bool, error) {
 	l1 := len(s)
 	m := make(map[int]bool)

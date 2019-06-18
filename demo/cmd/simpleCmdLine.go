@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"DCacheClient/model/client"
@@ -38,14 +38,14 @@ func main() {
 	switch cmd {
 	case "get":
 		key := cmdList[0]
-		value, err := r.GetKV(key, opt)
+		_, value, err := r.GetKV(key, opt)
 		if err != nil {
 			fmt.Sprintln(err)
 		}
 		fmt.Println(value)
 	case "gets":
 		keys := cmdList
-		values, err := r.GetKVBatch(keys, opt)
+		_, values, err := r.GetKVBatch(keys, opt)
 		if err != nil {
 			fmt.Sprintln(err)
 		}
@@ -59,11 +59,11 @@ func main() {
 		if err != nil {
 			fmt.Sprintln(err)
 		}
-		value, _, err := r.GetAllKeys(int32(index), int32(count), opt)
+		_, value, _, err := r.GetAllKeys(int32(index), int32(count), opt)
 		fmt.Println(value)
 	case "check":
 		keys := cmdList
-		value, err := r.CheckKey(keys, opt)
+		_, value, err := r.CheckKey(keys, opt)
 		if err != nil {
 			fmt.Sprintln(err)
 		}

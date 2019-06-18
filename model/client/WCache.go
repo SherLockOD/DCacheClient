@@ -2,7 +2,7 @@ package client
 
 import (
 	DC "DCacheClient/pkg/DCache"
-	"DCacheClient/pkg/myGoTools"
+	"DCacheClient/pkg/myGoTools/base"
 	"fmt"
 )
 
@@ -21,7 +21,7 @@ func (r *Req) SetKV(key, value string, dirty bool, ext int32, opt map[string]str
 		return ret, fmt.Errorf("ret '%v' and err '%v' as setting the key-value '%v, %v'",
 			ret, err, key, value)
 	}
-	return ret, nil
+	return ret, err
 }
 
 func (r *Req) InsertKV(key, value string, dirty bool, ext int32, opt map[string]string) (int32, error) {
@@ -39,7 +39,7 @@ func (r *Req) InsertKV(key, value string, dirty bool, ext int32, opt map[string]
 		return ret, fmt.Errorf("ret '%v' and err '%v' as setting the key-value '%v, %v'",
 			ret, err, key, value)
 	}
-	return ret, nil
+	return ret, err
 }
 
 func (r *Req) SetKVBatch(keys, values []string, dirtys []bool, exts []int32, opt map[string]string) (int32, map[string]int32, error) {
@@ -47,7 +47,8 @@ func (r *Req) SetKVBatch(keys, values []string, dirtys []bool, exts []int32, opt
 	var sSetKV []DC.SSetKeyValue
 
 	equal = append(equal, len(keys), len(values), len(dirtys), len(exts))
-	ok, err := myGoTools.AllIntEqual(equal)
+	// TODO
+	ok, err := base.AllIntEqual(equal)
 	if ! ok {
 		return CheckElemErr, make(map[string]int32), fmt.Errorf("ssetkeyvalue element nums is not equal, err msg: %v",
 			err)
@@ -70,7 +71,7 @@ func (r *Req) SetKVBatch(keys, values []string, dirtys []bool, exts []int32, opt
 		return ret, resp.KeyResult, fmt.Errorf("ret '%v' and err '%v' as setting the KVS 'keys: %v', 'values: %v', RES '%v'",
 			ret, err, keys, values, resp.KeyResult)
 	}
-	return ret, resp.KeyResult, nil
+	return ret, resp.KeyResult, err
 }
 
 func (r *Req) UpdateKV(key, value string, dirty bool, op, ext int32, opt map[string]string) (int32, string, error){
@@ -92,7 +93,7 @@ func (r *Req) UpdateKV(key, value string, dirty bool, op, ext int32, opt map[str
 		return ret, resp.RetValue, fmt.Errorf("ret '%v' and err '%v' as updating the key-value '%v, %s'",
 			ret, err, key, value)
 	}
-	return ret, resp.RetValue, nil
+	return ret, resp.RetValue, err
 }
 
 /*
@@ -116,7 +117,7 @@ func (r *Req) DelKV(key string, opt map[string]string) (int32, error) {
 	if err != nil {
 		return ret, fmt.Errorf("ret '%v' and err '%v' as deleting the key '%v'", ret, err, key)
 	}
-	return ret, nil
+	return ret, err
 }
 
 func (r *Req) DelKVBatch(keys []string, opt map[string]string) (int32, map[string]int32, error){
@@ -136,5 +137,5 @@ func (r *Req) DelKVBatch(keys []string, opt map[string]string) (int32, map[strin
 		return ret, resp.KeyResult, fmt.Errorf("ret '%v' and err '%v' as deleting the KVS 'keys: %v' RES '%v'", ret, err,
 			keys, resp.KeyResult)
 	}
-	return ret, resp.KeyResult, nil
+	return ret, resp.KeyResult, err
 }

@@ -1,12 +1,9 @@
 package main
 
 import (
-	//"DCacheClient/model/client"
-	//"DCacheClient/model/config"
 	"fmt"
 	"sync"
 
-	//"os"
 	"DCacheClient/pkg/DCache"
 	"github.com/TarsCloud/TarsGo/tars"
 	"github.com/go-redis/redis"

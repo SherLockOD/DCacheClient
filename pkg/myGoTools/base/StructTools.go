@@ -1,4 +1,4 @@
-package myGoTools
+package base
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// 获取struct的字段名称，返回字段切片
+// Get struct field name and return field slice
 func GetFieldName(s interface{}) ([]string, error) {
 	t := reflect.TypeOf(s)
 	if t.Kind() == reflect.Ptr {
@@ -23,7 +23,7 @@ func GetFieldName(s interface{}) ([]string, error) {
 	return result, nil
 }
 
-// 获取结构体中的Tag的值，没有tag则返回字段值
+// Get struct tags value or return field value
 func GetTagName(s interface{}) ([]string, error) {
 	t := reflect.TypeOf(s)
 	if t.Kind() == reflect.Ptr {

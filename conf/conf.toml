@@ -1,9 +1,9 @@
 Title = "DCache Configure"
 
 [Registry]
-Property = "tars.tarsregistry.QueryObj@tcp -h 10.80.137.193 -p 17890"
+Property = "tars.tarsregistry.QueryObj@tcp -h {{id_addr}} -p 17890"
 
 [KVCache]
-ModuleName = "DCacheApp_ABTest"
-CacheObj = "DCache.DCacheApp_ABTestKVCacheServer1-1.CacheObj"
-WCacheObj = "DCache.DCacheApp_ABTestKVCacheServer1-1.WCacheObj"
+ModuleName = "DCacheApp_xxx"
+CacheObj = "DCache.DCacheApp_xxxKVCacheServer1-1.CacheObj"
+WCacheObj = "DCache.DCacheApp_xxxKVCacheServer1-1.WCacheObj"

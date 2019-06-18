@@ -2,14 +2,14 @@ package main
 
 import (
 	"DCacheClient/model/client"
-	"DCacheClient/model/cmd"
 	"DCacheClient/model/config"
-	"DCacheClient/model/path"
 	"fmt"
+	"os"
 )
 
 func main() {
-	basePath, err := path.GetProjectPath(3)
+	// 先展示一个简易的DEMO，其他功能后续添加
+	basePath, err := os.Getwd()
 	if err != nil {
 		fmt.Sprintln(err)
 	}
@@ -18,5 +18,13 @@ func main() {
 		fmt.Sprintln(err)
 	}
 	r, _ := client.NewClient(cfg.Registry.Property, cfg.KVCache.CacheObj, cfg.KVCache.WCacheObj, cfg.KVCache.ModuleName)
-	cmd.Execute(r)
+	opt := make(map[string]string)
+
+	// SET
+	ret, err := r.SetKV("name", "likuo5",true, 0, opt)
+	fmt.Println(ret)
+
+	// GET
+	value, err := r.GetKV("name", opt)
+	fmt.Println(value)
 }
