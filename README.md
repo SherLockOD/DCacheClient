@@ -1,34 +1,39 @@
 # DCache Client Tools
 
 ## Config
-> set config for the connecting DCache
-- Registry
-    - property : set tars registry address   
-    `eg: tars.tarsregistry.QueryObj@tcp -h ip_addr -p 17890`
+Set config for the connecting DCache
+
+
+### Registry
+- property : set tars registry address   
+`eg: tars.tarsregistry.QueryObj@tcp -h ip_addr -p 17890`
+
+
+### KVCache
+- ModuleName : set module name of the KVCache App   
+`eg: DCacheApp_test`
+
+ 
+- CacheObj : set Cache object name of the App   
+`eg: DCache.DCacheApp_testKVCacheServer1-1.CacheObj`
+
     
-- KVCache
-    - ModuleName : set module name of the KVCache App   
-    `eg: DCacheApp_test`
-    
-    - CacheObj : set Cache object name of the App   
-    `eg: DCache.DCacheApp_testKVCacheServer1-1.CacheObj`
-    
-    - WCacheObj :  set WCache object name of the App    
-    `eg: DCache.DCacheApp_testKVCacheServer1-1.WCacheObj`
+- WCacheObj :  set WCache object name of the App    
+`eg: DCache.DCacheApp_testKVCacheServer1-1.WCacheObj`
+
     
 ## Build
-- `build`
+- build
 
     `bash build.sh build`
 
-- `clear`
+- clear
 
     `bash build.sh clear`     
 
 ## Quick Start
 ### Help
 - `help`
-
 ```bash
 ./DCache-Cli help
 ```
