@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"sync"
-
 	"DCacheClient/pkg/DCache"
+	"fmt"
 	"github.com/TarsCloud/TarsGo/tars"
 	"github.com/go-redis/redis"
 	"testing"
@@ -20,57 +18,16 @@ var (
 	// one goroutines request nums
 	grn = trn / gn
 
-	wg sync.WaitGroup
+	// wg sync.WaitGroup
 )
 
-/*
-func Benchmark_Set(b *testing.B) {
-	b.StopTimer()
-	b.N = 1000
-	basePath, err := os.Getwd()
-	if err != nil {
-		fmt.Sprintln(err)
-	}
-	cfg, err := config.ConfigParse(basePath)
-	if err != nil {
-		fmt.Sprintln(err)
-	}
-	r, _ := client.NewClient(cfg.Registry.Property, cfg.KVCache.CacheObj, cfg.KVCache.WCacheObj, cfg.KVCache.ModuleName)
-	opt := make(map[string]string)
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		b.ReportAllocs()
-		go func() { _, _ = r.SetKV("foo", "bar", true, 0, opt) }()
-	}
-}
-
-func Benchmark_Get(b *testing.B) {
-	b.StopTimer()
-	b.N = 100000
-	basePath, err := os.Getwd()
-	if err != nil {
-		fmt.Sprintln(err)
-	}
-	cfg, err := config.ConfigParse(basePath)
-	if err != nil {
-		fmt.Sprintln(err)
-	}
-	r, _ := client.NewClient(cfg.Registry.Property, cfg.KVCache.CacheObj, cfg.KVCache.WCacheObj, cfg.KVCache.ModuleName)
-	opt := make(map[string]string)
-	b.StartTimer()
-	for i := 0; i < b.N; i++ {
-		b.ReportAllocs()
-		func() { _, _ = r.GetKV("name", opt) }()
-	}
-}
-*/
 func Benchmark_DCacheSet(b *testing.B) {
 	b.StopTimer()
 	b.N = gn
 	comm := tars.NewCommunicator()
 	obj := "DCache.DCacheApp_ABTestKVCacheServer1-1.WCacheObj"
 	app := new(DCache.WCache)
-	comm.SetProperty("locator", "tars.tarsregistry.QueryObj@tcp -h 10.80.137.193 -p 17890")
+	comm.SetProperty("locator", "tars.tarsregistry.QueryObj@tcp -h x.x.x.x -p 17890")
 	comm.StringToProxy(obj, app)
 
 	opt := make(map[string]string)
@@ -102,7 +59,7 @@ func Benchmark_DCacheGet(b *testing.B) {
 	comm := tars.NewCommunicator()
 	obj := "DCache.DCacheApp_ABTestKVCacheServer1-1.CacheObj"
 	app := new(DCache.Cache)
-	comm.SetProperty("locator", "tars.tarsregistry.QueryObj@tcp -h 10.80.137.193 -p 17890")
+	comm.SetProperty("locator", "tars.tarsregistry.QueryObj@tcp -h x.x.x.x -p 17890")
 	comm.StringToProxy(obj, app)
 
 	opt := make(map[string]string)
@@ -133,13 +90,13 @@ func Benchmark_RedisClusterSet(b *testing.B) {
 	b.N = gn
 	client := redis.NewClusterClient(&redis.ClusterOptions{
 		Addrs: []string{
-			"10.80.137.192:6379",
-			"10.80.137.193:6379",
-			"10.80.137.194:6379",
-			"10.80.137.192:6380",
-			"10.80.137.193:6380",
-			"10.80.137.194:6380"},
-		Password: "nNnzvmX0MdoGIfyp",
+			"10.0.0.192:6379",
+			"10.0.0.193:6379",
+			"10.0.0.194:6379",
+			"10.0.0.192:6380",
+			"10.0.0.193:6380",
+			"10.0.0.194:6380"},
+		Password: "xxxxxx",
 	})
 	err := client.Ping().Err()
 	if err != nil {
@@ -161,13 +118,13 @@ func Benchmark_RedisClusterGet(b *testing.B) {
 	b.N = gn
 	client := redis.NewClusterClient(&redis.ClusterOptions{
 		Addrs: []string{
-			"10.80.137.192:6379",
-			"10.80.137.193:6379",
-			"10.80.137.194:6379",
-			"10.80.137.192:6380",
-			"10.80.137.193:6380",
-			"10.80.137.194:6380"},
-		Password: "nNnzvmX0MdoGIfyp",
+			"10.0.0.192:6379",
+			"10.0.0.193:6379",
+			"10.0.0.194:6379",
+			"10.0.0.192:6380",
+			"10.0.0.193:6380",
+			"10.0.0.194:6380"},
+		Password: "xxxxxx",
 	})
 	err := client.Ping().Err()
 	if err != nil {
@@ -188,7 +145,7 @@ func Benchmark_RedisSet(b *testing.B) {
 	b.StopTimer()
 	b.N = gn
 	client := redis.NewClient(&redis.Options{
-		Addr:     "10.80.137.193:6381",
+		Addr:     "10.0.0.193:6381",
 		Password: "",
 		DB:       0,
 	})
@@ -211,7 +168,7 @@ func Benchmark_RedisGet(b *testing.B) {
 	b.StopTimer()
 	b.N = gn
 	client := redis.NewClient(&redis.Options{
-		Addr:     "10.80.137.193:6381",
+		Addr:     "10.0.0.193:6381",
 		Password: "",
 		DB:       0,
 	})
